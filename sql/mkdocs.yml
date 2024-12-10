@@ -1,0 +1,73 @@
+site_name: initiations aux requettes sql
+
+site_description: >-
+  Ceci est une petite documentation sur les bases des requetes sql
+
+# Copyright
+copyright: Copyright &copy; 2016 - 2024 DjADE Djudula
+
+# Thème
+theme:
+  name: material
+  palette:
+    primary: 'blue'
+    accent: 'light blue'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  features:
+    - navigation.tabs
+    - navigation.expand
+    - toc.integrate
+    - search.highlight
+    - content.tabs.link
+
+# Navigation
+nav:
+  - Accueil: index.md
+  - Introduction:
+      - "Concepts de Base": introduction/concepts_base.md
+  - Requêtes SQL:
+      - "Requêtes de Base": sql/base_queries.md
+      - "Filtrer et Trier": sql/filter_sort.md
+      - "Agrégation et Groupement": sql/aggregation.md
+      - "Requêtes Avancées":
+          - "Joins": sql/joins.md
+          - "Sous-Requêtes": sql/subqueries.md
+  - Modification des Données:
+      - "Insertion": sql/insert.md
+      - "Mise à Jour": sql/update.md
+      - "Suppression": sql/delete.md
+  - Cas d'Utilisation:
+      - "Gestion d'une Entreprise": sql/use_case.md
+  - Bonnes Pratiques: sql/best_practices.md
+  - Contact: contact.md
+
+# Extensions Markdown (facultatif, mais recommandé pour du contenu enrichi)
+markdown_extensions:
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.emoji
+  - pymdownx.details
+  - attr_list
+
+# Plugin pour la recherche
+plugins:
+  - search:
+      prebuild_index: true
+
+# Informations supplémentaires
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/votre-profil
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/votre-profil
+  
+# Options de Déploiement (facultatif, si hébergé sur GitHub Pages)
+# site_dir: site
+# github_url: https://github.com/votre-projet

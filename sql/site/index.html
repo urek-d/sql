@@ -1,0 +1,1475 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Ceci est une petite documentation sur les bases des requetes sql">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+    
+    
+      
+        <title>initiations aux requettes sql</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#requeter-une-base-de-donnees-avec-sql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="initiations aux requettes sql" class="md-header__button md-logo" aria-label="initiations aux requettes sql" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            initiations aux requettes sql
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Accueil
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="introduction/concepts_base.md" class="md-tabs__link">
+          
+  
+  Introduction
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="sql/base_queries.md" class="md-tabs__link">
+          
+  
+  Requêtes SQL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="sql/insert.md" class="md-tabs__link">
+          
+  
+  Modification des Données
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="sql/use_case.md" class="md-tabs__link">
+          
+  
+  Cas d'Utilisation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="sql/best_practices.md" class="md-tabs__link">
+        
+  
+    
+  
+  Bonnes Pratiques
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="contact.md" class="md-tabs__link">
+        
+  
+    
+  
+  Contact
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="initiations aux requettes sql" class="md-nav__button md-logo" aria-label="initiations aux requettes sql" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    initiations aux requettes sql
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts de Base
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts de Base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#les-bases-de-donnees-relationnelles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les Bases de Données Relationnelles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntaxe-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntaxe SQL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requetes-sql-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requêtes SQL de Base
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requêtes SQL de Base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-selection-des-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Sélection des Données
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-filtrer-les-donnees-avec-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Filtrer les Données avec WHERE
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Filtrer les Données avec WHERE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtrer-par-une-condition-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtrer par une condition simple :
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combiner-des-conditions-avec-and-et-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combiner des conditions avec AND et OR :
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-trier-les-resultats" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Trier les Résultats
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fonctions-et-operations-sql-avancees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonctions et Opérations SQL Avancées
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fonctions et Opérations SQL Avancées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agregation-avec-group-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agrégation avec GROUP BY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-limiter-le-nombre-de-resultats" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Limiter le Nombre de Résultats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-les-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Les Joins
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sous-requetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Sous-Requêtes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modifier-les-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modifier les Données
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modifier les Données">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ajouter-des-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Ajouter des Données
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mettre-a-jour-des-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Mettre à Jour des Données
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-supprimer-des-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Supprimer des Données
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bonnes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bonnes Pratiques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-dutilisation-concret" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cas d'Utilisation Concret
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas d'Utilisation Concret">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lister-les-noms-des-employes-avec-leur-departement" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Lister les noms des employés avec leur département.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-trouver-les-departements-avec-plus-de-10-employes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Trouver les départements avec plus de 10 employés.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-augmenter-de-5-le-salaire-des-employes-du-departement-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Augmenter de 5% le salaire des employés du département "IT".
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="introduction/concepts_base.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concepts de Base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Requêtes SQL
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Requêtes SQL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/base_queries.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requêtes de Base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/filter_sort.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Filtrer et Trier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/aggregation.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agrégation et Groupement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Requêtes Avancées
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Requêtes Avancées
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/joins.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Joins
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/subqueries.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sous-Requêtes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modification des Données
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Modification des Données
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/insert.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Insertion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/update.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mise à Jour
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/delete.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Suppression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Cas d'Utilisation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Cas d'Utilisation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/use_case.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gestion d'une Entreprise
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sql/best_practices.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bonnes Pratiques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contact.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="requeter-une-base-de-donnees-avec-sql">Requêter une Base de Données avec SQL<a class="headerlink" href="#requeter-une-base-de-donnees-avec-sql" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Le Structured Query Language (SQL) est un langage standardisé pour gérer et manipuler les bases de données relationnelles. Il permet d'effectuer des opérations telles que l'extraction, l'insertion, la mise à jour ou la suppression de données, ainsi que la gestion de la structure des bases de données.</p>
+<hr />
+<h2 id="concepts-de-base">Concepts de Base<a class="headerlink" href="#concepts-de-base" title="Permanent link">&para;</a></h2>
+<h3 id="les-bases-de-donnees-relationnelles">Les Bases de Données Relationnelles<a class="headerlink" href="#les-bases-de-donnees-relationnelles" title="Permanent link">&para;</a></h3>
+<p>Une base de données relationnelle est une collection organisée de tables où chaque table contient des données structurées sous forme de lignes et de colonnes.</p>
+<figure markdown="span">
+
+![diagram](../assets/tables.png "diagram")
+
+<figcaption>Diagram</figcaption>
+</figure>
+
+<h3 id="syntaxe-sql">Syntaxe SQL<a class="headerlink" href="#syntaxe-sql" title="Permanent link">&para;</a></h3>
+<p>Une commande SQL est généralement structurée comme suit :
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">colonne1</span><span class="p">,</span><span class="w"> </span><span class="n">colonne2</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Chaque mot-clé (SELECT, FROM, WHERE) correspond à une étape de l'extraction des données.</p>
+<h2 id="requetes-sql-de-base">Requêtes SQL de Base<a class="headerlink" href="#requetes-sql-de-base" title="Permanent link">&para;</a></h2>
+<h3 id="1-selection-des-donnees">1. Sélection des Données<a class="headerlink" href="#1-selection-des-donnees" title="Permanent link">&para;</a></h3>
+<p>SELECT permet d extraire  les colones d une table par exemple pour selectionner toutes les colones d une table :</p>
+<div class="highlight"><pre><span></span><code><span class="w">   </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span><span class="p">;</span>
+</code></pre></div>
+<p><div class="highlight"><pre><span></span><code>koffi<span class="w">   </span><span class="p">|</span><span class="w"> </span>directeur<span class="w">                </span><span class="p">|</span><span class="w">  </span><span class="m">120000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Smith<span class="w">   </span><span class="p">|</span><span class="w"> </span>Analyste<span class="w">                 </span><span class="p">|</span><span class="w">   </span><span class="m">60000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">2</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Johnson<span class="w"> </span><span class="p">|</span><span class="w"> </span>Développeur<span class="w">              </span><span class="p">|</span><span class="w">   </span><span class="m">55000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">3</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Garcia<span class="w">  </span><span class="p">|</span><span class="w"> </span>Manager<span class="w">                  </span><span class="p">|</span><span class="w">   </span><span class="m">70000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">4</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Chen<span class="w">    </span><span class="p">|</span><span class="w"> </span>Ingénieur<span class="w">                </span><span class="p">|</span><span class="w">   </span><span class="m">65000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">5</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Lopez<span class="w">   </span><span class="p">|</span><span class="w"> </span>Spécialiste<span class="w"> </span>des<span class="w"> </span>ventes<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">75000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">6</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Singh<span class="w">   </span><span class="p">|</span><span class="w"> </span>Consultant<span class="w">               </span><span class="p">|</span><span class="w">   </span><span class="m">80000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">7</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Müller<span class="w">  </span><span class="p">|</span><span class="w"> </span>Assistant<span class="w">                </span><span class="p">|</span><span class="w">   </span><span class="m">50000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">8</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Ali<span class="w">     </span><span class="p">|</span><span class="w"> </span>Chef<span class="w"> </span>de<span class="w"> </span>projet<span class="w">           </span><span class="p">|</span><span class="w">   </span><span class="m">90000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">9</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Kim<span class="w">     </span><span class="p">|</span><span class="w"> </span>Designer<span class="w">                 </span><span class="p">|</span><span class="w">   </span><span class="m">60000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">10</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Nguyen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Analyste<span class="w"> </span>financier<span class="w">       </span><span class="p">|</span><span class="w">   </span><span class="m">85000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">11</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Rossi<span class="w">   </span><span class="p">|</span><span class="w"> </span>Développeur<span class="w"> </span>web<span class="w">          </span><span class="p">|</span><span class="w">   </span><span class="m">70000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">12</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Gomes<span class="w">   </span><span class="p">|</span><span class="w"> </span>Administrateur<span class="w"> </span>système<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">65000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">13</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Mahmoud<span class="w"> </span><span class="p">|</span><span class="w"> </span>Directeur<span class="w"> </span>des<span class="w"> </span>opérations<span class="w"> </span><span class="p">|</span><span class="w">  </span><span class="m">100000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">14</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Jansen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Gestionnaire<span class="w"> </span>de<span class="w"> </span>projet<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">95000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">15</span><span class="w"> </span><span class="p">|</span><span class="w">                           </span>
+<span class="w"> </span>Kumar<span class="w">   </span><span class="p">|</span><span class="w"> </span>Chef<span class="w"> </span>de<span class="w"> </span>produit<span class="w">          </span><span class="p">|</span><span class="w">   </span><span class="m">80000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">16</span><span class="w"> </span><span class="p">|</span>
+</code></pre></div>
+Extraire des colonnes spécifiques :</p>
+<div class="highlight"><pre><span></span><code><span class="w">   </span><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">position</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>koffi<span class="w">   </span><span class="p">|</span><span class="w"> </span>directeur
+<span class="w"> </span>Smith<span class="w">   </span><span class="p">|</span><span class="w"> </span>Analyste
+<span class="w"> </span>Johnson<span class="w"> </span><span class="p">|</span><span class="w"> </span>Développeur
+<span class="w"> </span>Garcia<span class="w">  </span><span class="p">|</span><span class="w"> </span>Manager
+<span class="w"> </span>Chen<span class="w">    </span><span class="p">|</span><span class="w"> </span>Ingénieur
+<span class="w"> </span>Lopez<span class="w">   </span><span class="p">|</span><span class="w"> </span>Spécialiste<span class="w"> </span>des<span class="w"> </span>ventes
+<span class="w"> </span>Singh<span class="w">   </span><span class="p">|</span><span class="w"> </span>Consultant
+<span class="w"> </span>Müller<span class="w">  </span><span class="p">|</span><span class="w"> </span>Assistant
+<span class="w"> </span>Ali<span class="w">     </span><span class="p">|</span><span class="w"> </span>Chef<span class="w"> </span>de<span class="w"> </span>projet
+<span class="w"> </span>Kim<span class="w">     </span><span class="p">|</span><span class="w"> </span>Designer
+<span class="w"> </span>Nguyen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Analyste<span class="w"> </span>financier
+<span class="w"> </span>Rossi<span class="w">   </span><span class="p">|</span><span class="w"> </span>Développeur<span class="w"> </span>web
+<span class="w"> </span>Gomes<span class="w">   </span><span class="p">|</span><span class="w"> </span>Administrateur<span class="w"> </span>système
+<span class="w"> </span>Mahmoud<span class="w"> </span><span class="p">|</span><span class="w"> </span>Directeur<span class="w"> </span>des<span class="w"> </span>opérations
+<span class="w"> </span>Jansen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Gestionnaire<span class="w"> </span>de<span class="w"> </span>projet
+<span class="w"> </span>Kumar<span class="w">   </span><span class="p">|</span><span class="w"> </span>Chef<span class="w"> </span>de<span class="w"> </span>produit
+</code></pre></div>
+<h2 id="2-filtrer-les-donnees-avec-where">2. Filtrer les Données avec WHERE<a class="headerlink" href="#2-filtrer-les-donnees-avec-where" title="Permanent link">&para;</a></h2>
+<p>Exemples :</p>
+<h3 id="filtrer-par-une-condition-simple">Filtrer par une condition simple :<a class="headerlink" href="#filtrer-par-une-condition-simple" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><span class="w">   </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employe</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">position</span><span class="o">=</span><span class="s1">&#39;Designer&#39;</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>Kim<span class="w"> </span><span class="p">|</span><span class="w"> </span>Designer<span class="w"> </span><span class="p">|</span><span class="w">   </span><span class="m">60000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">10</span><span class="w"> </span><span class="p">|</span>
+</code></pre></div></p>
+<h3 id="combiner-des-conditions-avec-and-et-or">Combiner des conditions avec AND et OR :<a class="headerlink" href="#combiner-des-conditions-avec-and-et-or" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">employe</span>
+<span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">position</span><span class="o">=</span><span class="s1">&#39;Analyste&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">salaire</span><span class="o">&gt;</span><span class="mi">50000</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Smith<span class="w"> </span><span class="p">|</span><span class="w"> </span>Analyste<span class="w"> </span><span class="p">|</span><span class="w">   </span><span class="m">60000</span><span class="w"> </span><span class="p">|</span><span class="w">          </span><span class="m">2</span><span class="w"> </span><span class="p">|</span>
+</code></pre></div></p>
+<h2 id="3-trier-les-resultats">3. Trier les Résultats<a class="headerlink" href="#3-trier-les-resultats" title="Permanent link">&para;</a></h2>
+<p>Utilisez ORDER BY pour trier les données :</p>
+<p><div class="highlight"><pre><span></span><code><span class="w">   </span><span class="k">select</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">salaire</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">employe</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span>
+<span class="w">     </span><span class="n">salaire</span><span class="w"> </span><span class="k">desc</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>koffi<span class="w">   </span><span class="p">|</span><span class="w">  </span><span class="m">120000</span>
+<span class="w"> </span>Mahmoud<span class="w"> </span><span class="p">|</span><span class="w">  </span><span class="m">100000</span>
+<span class="w"> </span>Jansen<span class="w">  </span><span class="p">|</span><span class="w">   </span><span class="m">95000</span>
+<span class="w"> </span>Ali<span class="w">     </span><span class="p">|</span><span class="w">   </span><span class="m">90000</span>
+<span class="w"> </span>Nguyen<span class="w">  </span><span class="p">|</span><span class="w">   </span><span class="m">85000</span>
+<span class="w"> </span>Singh<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">80000</span>
+<span class="w"> </span>Kumar<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">80000</span>
+<span class="w"> </span>Lopez<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">75000</span>
+<span class="w"> </span>Garcia<span class="w">  </span><span class="p">|</span><span class="w">   </span><span class="m">70000</span>
+<span class="w"> </span>Rossi<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">70000</span>
+<span class="w"> </span>Chen<span class="w">    </span><span class="p">|</span><span class="w">   </span><span class="m">65000</span>
+<span class="w"> </span>Gomes<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">65000</span>
+<span class="w"> </span>Smith<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">60000</span>
+<span class="w"> </span>Kim<span class="w">     </span><span class="p">|</span><span class="w">   </span><span class="m">60000</span>
+<span class="w"> </span>Johnson<span class="w"> </span><span class="p">|</span><span class="w">   </span><span class="m">55000</span>
+<span class="w"> </span>Müller<span class="w">  </span><span class="p">|</span><span class="w">   </span><span class="m">50000</span>
+</code></pre></div></p>
+<h2 id="fonctions-et-operations-sql-avancees">Fonctions et Opérations SQL Avancées<a class="headerlink" href="#fonctions-et-operations-sql-avancees" title="Permanent link">&para;</a></h2>
+<h3 id="agregation-avec-group-by">Agrégation avec GROUP BY<a class="headerlink" href="#agregation-avec-group-by" title="Permanent link">&para;</a></h3>
+<p>Les fonctions d'agrégation (comme SUM, AVG, MAX) sont utilisées pour effectuer des calculs sur des groupes de données.</p>
+<p>Exemple :
+Calculer le salaire moyen par département :</p>
+<p><div class="highlight"><pre><span></span><code><span class="w">   </span><span class="k">SELECT</span><span class="w"> </span><span class="k">position</span><span class="p">,</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">salaire</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">average_salary</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employe</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">position</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Directeur<span class="w"> </span>des<span class="w"> </span>opérations<span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">100000</span>
+<span class="w"> </span>Designer<span class="w">                 </span><span class="p">|</span><span class="w">          </span><span class="m">60000</span>
+<span class="w"> </span>Gestionnaire<span class="w"> </span>de<span class="w"> </span>projet<span class="w">   </span><span class="p">|</span><span class="w">          </span><span class="m">95000</span>
+<span class="w"> </span>Chef<span class="w"> </span>de<span class="w"> </span>produit<span class="w">          </span><span class="p">|</span><span class="w">          </span><span class="m">80000</span>
+<span class="w"> </span>Développeur<span class="w">              </span><span class="p">|</span><span class="w">          </span><span class="m">55000</span>
+<span class="w"> </span>Administrateur<span class="w"> </span>système<span class="w">   </span><span class="p">|</span><span class="w">          </span><span class="m">65000</span>
+<span class="w"> </span>Analyste<span class="w"> </span>financier<span class="w">       </span><span class="p">|</span><span class="w">          </span><span class="m">85000</span>
+<span class="w"> </span>Manager<span class="w">                  </span><span class="p">|</span><span class="w">          </span><span class="m">70000</span>
+<span class="w"> </span>Ingénieur<span class="w">                </span><span class="p">|</span><span class="w">          </span><span class="m">65000</span>
+<span class="w"> </span>Spécialiste<span class="w"> </span>des<span class="w"> </span>ventes<span class="w">   </span><span class="p">|</span><span class="w">          </span><span class="m">75000</span>
+<span class="w"> </span>Consultant<span class="w">               </span><span class="p">|</span><span class="w">          </span><span class="m">80000</span>
+<span class="w"> </span>Développeur<span class="w"> </span>web<span class="w">          </span><span class="p">|</span><span class="w">          </span><span class="m">70000</span>
+<span class="w"> </span>Analyste<span class="w">                 </span><span class="p">|</span><span class="w">          </span><span class="m">60000</span>
+<span class="w"> </span>Assistant<span class="w">                </span><span class="p">|</span><span class="w">          </span><span class="m">50000</span>
+</code></pre></div></p>
+<h3 id="2-limiter-le-nombre-de-resultats">2. Limiter le Nombre de Résultats<a class="headerlink" href="#2-limiter-le-nombre-de-resultats" title="Permanent link">&para;</a></h3>
+<p>Utilisez LIMIT pour restreindre le nombre de lignes retournées :</p>
+<div class="highlight"><pre><span></span><code><span class="w">   </span><span class="k">select</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">salaire</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">employe</span><span class="w"> </span>
+<span class="w">    </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">salaire</span><span class="w"> </span>
+<span class="w">    </span><span class="k">desc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">5</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Mahmoud<span class="w"> </span><span class="p">|</span><span class="w"> </span>Directeur<span class="w"> </span>des<span class="w"> </span>opérations<span class="w"> </span><span class="p">|</span><span class="w">  </span><span class="m">100000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">43</span><span class="w"> </span><span class="p">|</span><span class="w">                          </span><span class="m">4</span>
+<span class="w"> </span>Jansen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Gestionnaire<span class="w"> </span>de<span class="w"> </span>projet<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">95000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">44</span><span class="w"> </span><span class="p">|</span><span class="w">                          </span><span class="m">3</span>
+<span class="w"> </span>Nguyen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Analyste<span class="w"> </span>financier<span class="w">       </span><span class="p">|</span><span class="w">   </span><span class="m">85000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">40</span><span class="w"> </span><span class="p">|</span><span class="w">                          </span><span class="m">3</span>
+<span class="w"> </span>Singh<span class="w">   </span><span class="p">|</span><span class="w"> </span>Consultant<span class="w">               </span><span class="p">|</span><span class="w">   </span><span class="m">80000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">36</span><span class="w"> </span><span class="p">|</span><span class="w">                          </span><span class="m">3</span>
+<span class="w"> </span>Kumar<span class="w">   </span><span class="p">|</span><span class="w"> </span>Chef<span class="w"> </span>de<span class="w"> </span>produit<span class="w">          </span><span class="p">|</span><span class="w">   </span><span class="m">80000</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="m">45</span><span class="w"> </span><span class="p">|</span><span class="w">                          </span><span class="m">2</span>
+</code></pre></div>
+<h3 id="1-les-joins">1. Les Joins<a class="headerlink" href="#1-les-joins" title="Permanent link">&para;</a></h3>
+<p>Les jointures permettent de relier des tables en utilisant des colonnes communes.</p>
+<p>Exemple 1 : Jointure Interne (INNER JOIN)</p>
+<p><div class="highlight"><pre><span></span><code><span class="w">   </span><span class="k">SELECT</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">nom</span><span class="p">,</span>
+<span class="w">       </span><span class="n">d</span><span class="p">.</span><span class="n">nom_departement</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employe</span><span class="w"> </span><span class="n">e</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">departement</span><span class="w"> </span><span class="n">d</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">id_departement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">id_departement</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Smith<span class="w">   </span><span class="p">|</span><span class="w"> </span>Ressources<span class="w"> </span>Humaines
+<span class="w"> </span>Johnson<span class="w"> </span><span class="p">|</span><span class="w"> </span>Marketing
+<span class="w"> </span>Garcia<span class="w">  </span><span class="p">|</span><span class="w"> </span>Informatique
+<span class="w"> </span>Chen<span class="w">    </span><span class="p">|</span><span class="w"> </span>Finance
+<span class="w"> </span>Lopez<span class="w">   </span><span class="p">|</span><span class="w"> </span>Finance
+<span class="w"> </span>Singh<span class="w">   </span><span class="p">|</span><span class="w"> </span>Marketing
+<span class="w"> </span>Müller<span class="w">  </span><span class="p">|</span><span class="w"> </span>Ressources<span class="w"> </span>Humaines
+<span class="w"> </span>Ali<span class="w">     </span><span class="p">|</span><span class="w"> </span>Développement
+<span class="w"> </span>Kim<span class="w">     </span><span class="p">|</span><span class="w"> </span>Finance
+<span class="w"> </span>Nguyen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Marketing
+<span class="w"> </span>Rossi<span class="w">   </span><span class="p">|</span><span class="w"> </span>Développement
+<span class="w"> </span>Gomes<span class="w">   </span><span class="p">|</span><span class="w"> </span>Ressources<span class="w"> </span>Humaines
+<span class="w"> </span>Mahmoud<span class="w"> </span><span class="p">|</span><span class="w"> </span>Finance
+<span class="w"> </span>Jansen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Marketing
+<span class="w"> </span>Kumar<span class="w">   </span><span class="p">|</span><span class="w"> </span>Développement
+</code></pre></div></p>
+<p>Exemple 2 : Jointure Gauche (LEFT JOIN)</p>
+<p><div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">nom</span><span class="p">,</span>
+<span class="w">   </span><span class="n">d</span><span class="p">.</span><span class="n">nom_departement</span><span class="w"> </span>
+<span class="w">   </span><span class="k">from</span><span class="w"> </span><span class="n">employe</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">departement</span><span class="w"> </span>
+<span class="w">   </span><span class="n">d</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">id_departement_departement</span><span class="o">=</span><span class="n">id_departement</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Smith<span class="w">   </span><span class="p">|</span><span class="w"> </span>Ressources<span class="w"> </span>Humaines
+<span class="w"> </span>Johnson<span class="w"> </span><span class="p">|</span><span class="w"> </span>Marketing
+<span class="w"> </span>Garcia<span class="w">  </span><span class="p">|</span><span class="w"> </span>Informatique
+<span class="w"> </span>Chen<span class="w">    </span><span class="p">|</span><span class="w"> </span>Finance
+<span class="w"> </span>Lopez<span class="w">   </span><span class="p">|</span><span class="w"> </span>Finance
+<span class="w"> </span>Singh<span class="w">   </span><span class="p">|</span><span class="w"> </span>Marketing
+<span class="w"> </span>Müller<span class="w">  </span><span class="p">|</span><span class="w"> </span>Ressources<span class="w"> </span>Humaines
+<span class="w"> </span>Ali<span class="w">     </span><span class="p">|</span><span class="w"> </span>Développement
+<span class="w"> </span>Kim<span class="w">     </span><span class="p">|</span><span class="w"> </span>Finance
+<span class="w"> </span>Nguyen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Marketing
+<span class="w"> </span>Rossi<span class="w">   </span><span class="p">|</span><span class="w"> </span>Développement
+<span class="w"> </span>Gomes<span class="w">   </span><span class="p">|</span><span class="w"> </span>Ressources<span class="w"> </span>Humaines
+<span class="w"> </span>Mahmoud<span class="w"> </span><span class="p">|</span><span class="w"> </span>Finance
+<span class="w"> </span>Jansen<span class="w">  </span><span class="p">|</span><span class="w"> </span>Marketing
+<span class="w"> </span>Kumar<span class="w">   </span><span class="p">|</span><span class="w"> </span>Développement
+</code></pre></div></p>
+<h3 id="2-sous-requetes">2. Sous-Requêtes<a class="headerlink" href="#2-sous-requetes" title="Permanent link">&para;</a></h3>
+<p>Une sous-requête est une requête imbriquée dans une autre.</p>
+<p>Exemple :
+Trouver les employés ayant un salaire supérieur à la moyenne :</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">salaire</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employe</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">salaire</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">salaire</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employe</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Lopez<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">75000</span>
+<span class="w"> </span>Singh<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">80000</span>
+<span class="w"> </span>Ali<span class="w">     </span><span class="p">|</span><span class="w">   </span><span class="m">90000</span>
+<span class="w"> </span>Nguyen<span class="w">  </span><span class="p">|</span><span class="w">   </span><span class="m">85000</span>
+<span class="w"> </span>Mahmoud<span class="w"> </span><span class="p">|</span><span class="w">  </span><span class="m">100000</span>
+<span class="w"> </span>Jansen<span class="w">  </span><span class="p">|</span><span class="w">   </span><span class="m">95000</span>
+<span class="w"> </span>Kumar<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">80000</span>
+</code></pre></div></p>
+<h2 id="modifier-les-donnees">Modifier les Données<a class="headerlink" href="#modifier-les-donnees" title="Permanent link">&para;</a></h2>
+<h3 id="1-ajouter-des-donnees">1. Ajouter des Données<a class="headerlink" href="#1-ajouter-des-donnees" title="Permanent link">&para;</a></h3>
+<p>Utilisez INSERT pour insérer de nouvelles lignes dans une table.</p>
+<p>Exemple :
+<div class="highlight"><pre><span></span><code><span class="w">   </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">position</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="p">,</span><span class="w"> </span><span class="n">department_id</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Manager&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">75000</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="2-mettre-a-jour-des-donnees">2. Mettre à Jour des Données<a class="headerlink" href="#2-mettre-a-jour-des-donnees" title="Permanent link">&para;</a></h3>
+<p>Utilisez UPDATE pour modifier des données existantes.</p>
+<p>Exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">update</span><span class="w"> </span><span class="n">employe</span>
+<span class="w">   </span><span class="k">set</span><span class="w"> </span><span class="n">salaire</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80000</span><span class="w"> </span>
+<span class="w">   </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;jansen&#39;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="3-supprimer-des-donnees">3. Supprimer des Données<a class="headerlink" href="#3-supprimer-des-donnees" title="Permanent link">&para;</a></h3>
+<p>Utilisez DELETE pour supprimer des données.</p>
+<p>Exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Alice&#39;</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="bonnes-pratiques">Bonnes Pratiques<a class="headerlink" href="#bonnes-pratiques" title="Permanent link">&para;</a></h2>
+<p>Toujours tester les requêtes dans un environnement de développement.
+Utiliser des transactions pour effectuer des modifications importantes </p>
+<h2 id="cas-dutilisation-concret">Cas d'Utilisation Concret<a class="headerlink" href="#cas-dutilisation-concret" title="Permanent link">&para;</a></h2>
+<p>Scénario : Gestion d'une Entreprise
+Base de Données :
+employees : contient des informations sur les employés.
+departments : contient des informations sur les départements.</p>
+<p>Objectif :</p>
+<h3 id="1-lister-les-noms-des-employes-avec-leur-departement">1. Lister les noms des employés avec leur département.<a class="headerlink" href="#1-lister-les-noms-des-employes-avec-leur-departement" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">department_name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="n">e</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">departments</span><span class="w"> </span><span class="n">d</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="2-trouver-les-departements-avec-plus-de-10-employes">2. Trouver les départements avec plus de 10 employés.<a class="headerlink" href="#2-trouver-les-departements-avec-plus-de-10-employes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">department_name</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">employee_count</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">departments</span><span class="w"> </span><span class="n">d</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="n">e</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">department_id</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">department_name</span>
+<span class="k">HAVING</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="3-augmenter-de-5-le-salaire-des-employes-du-departement-it">3. Augmenter de 5% le salaire des employés du département "IT".<a class="headerlink" href="#3-augmenter-de-5-le-salaire-des-employes-du-departement-it" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">employees</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">05</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">departments</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">department_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;IT&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2016 - 2024 DjADE Djudula
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/votre-profil" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/votre-profil" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.expand", "toc.integrate", "search.highlight", "content.tabs.link"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+    
+  </body>
+</html>
